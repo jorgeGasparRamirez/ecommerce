@@ -69,5 +69,5 @@ export class DashboardComponent {
     'thumbnails': string
   }[]> = computed(() => this.allStrips.slice(0, this.visibleStrips()));
 
-  gridClass: Signal<string> = computed(() => `grid grid-cols-${this.visibleStrips()} grid-rows-[90px] gap-2`);
+  gridClass: Signal<string> = computed(() => `grid grid-cols-${this.visibleStrips()} grid-rows-[repeat(2,90px)] gap-2`);
 }
