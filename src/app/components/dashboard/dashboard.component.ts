@@ -2,10 +2,11 @@ import {Component, computed, inject, signal, Signal} from '@angular/core';
 import {HeaderComponent} from '../common/header/header.component';
 import {CategoryStripComponent} from '../category-strip/category-strip.component';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout'
+import {ProductListComponent} from '../product/product.list.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [HeaderComponent, CategoryStripComponent],
+  imports: [HeaderComponent, CategoryStripComponent, ProductListComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -69,5 +70,5 @@ export class DashboardComponent {
     'thumbnails': string
   }[]> = computed(() => this.allStrips.slice(0, this.visibleStrips()));
 
-  gridClass: Signal<string> = computed(() => `grid grid-cols-${this.visibleStrips()} grid-rows-[repeat(2,90px)] gap-2`);
+  gridClass: Signal<string> = computed(() => `grid grid-cols-${this.visibleStrips()}  gap-2 gap-y-3`);
 }
