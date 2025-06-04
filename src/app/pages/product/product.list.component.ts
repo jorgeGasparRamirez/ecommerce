@@ -12,8 +12,9 @@ import {Product} from './product.model';
 })
 export class ProductListComponent implements OnInit {
   private productService = inject(ProductService);
-  products: Product[] | [] = [];
+  products: Product[] = [];
   loading = true;
+  skeletonItems = Array(5).fill(0); // Ajusta el número según tus cards
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
@@ -26,6 +27,26 @@ export class ProductListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  addProduct(product: Product) {
+    if (product != null) {
+      const item = this.products.find(value => value.id == product.id);
+      if (item) {
+        item.amount += 1;
+      }
+      console.log(this.products);
+    }
+  }
+
+  substractProduct(product: Product) {
+    if (product != null) {
+      const item = this.products.find(value => value.id == product.id);
+      if (item && item.amount > 0) {
+        item.amount -= 1;
+      }
+      console.log(this.products);
+    }
   }
 
 

@@ -1,0 +1,31 @@
+@if (loading) {
+  @for (_ of skeletonItems; track $index) {
+    <div class="h-90 w-52 bg-white  rounded-t-xl relative  overflow-hidden">
+      <div class="animate-pulse">
+        <div class="bg-gray-200 h-48 w-full"></div>
+        <div class="p-4">
+          <div class="h-6 bg-gray-200 rounded mb-2"></div>
+          <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+        </div>
+      </div>
+      <svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 1440 150">
+        <path
+          d="M0,0 C480,100 960,100 1440,0 L1440,150 L0,150 Z"
+          fill="#f6f7f7"
+        />
+      </svg>
+    </div>
+  }
+} @else {
+  @for (product of products; track product.id) {
+    <app-product-card [product]="product" (addProduct)="addProduct($event)"
+                      (subtractProduct)="substractProduct($event)">
+
+    </app-product-card>
+  } @empty {
+    <p>Sin productos</p>
+  }
+
+}
+
+
