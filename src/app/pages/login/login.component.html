@@ -5,12 +5,29 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="#" method="POST">
+    <form class="space-y-6" [formGroup]="credentials" (ngSubmit)="onSubmit()">
       <div>
         <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
+
         <div class="mt-2">
-          <input type="email" name="email" id="email" autocomplete="email" required
-                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+          <input type="email" name="email" id="email" autocomplete="email" required formControlName="email"
+                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                 [class]="email.invalid && email.touched ?
+        'border-2 border-red-500 ring-red-500 focus:ring-red-500' :
+        'ring-gray-300 focus:ring-indigo-600'"
+
+          >
+
+          @if (email.invalid && email.touched) {
+            <div class="mt-0.5 text-sm text-red-600">
+              @if (email.errors?.['required']) {
+                <p>El email es obligatorio.</p>
+              }
+              @if (email.errors?.['email']) {
+                <p>Por favor ingresa un email válido</p>
+              }
+            </div>
+          }
         </div>
       </div>
 
@@ -23,12 +40,25 @@
         </div>
         <div class="mt-2">
           <input type="password" name="password" id="password" autocomplete="current-password" required
-                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                 formControlName="password"
+                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                 [class]="password.invalid && password.touched ?
+                          'border-2 border-red-500 ring-red-500 focus:ring-red-500' :
+                          'ring-gray-300 focus:ring-indigo-600'"
+          >
+          @if (password.invalid && password.touched) {
+            <div class="mt-0.5 text-sm text-red-600">
+              @if (password.errors?.['required']) {
+                <p>El contraseña es obligatorio.</p>
+              }
+            </div>
+          }
+
         </div>
       </div>
 
       <div>
-        <button type="submit"
+        <button type="submit" [disabled]="!credentials.valid"
                 class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           Sign in
         </button>

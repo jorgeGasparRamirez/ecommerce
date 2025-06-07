@@ -1,0 +1,51 @@
+import {inject, Injectable} from '@angular/core';
+import {State, Action, Selector, StateContext} from '@ngxs/store';
+import {ProductAction} from './product.actions';
+import {Product} from '../../pages/product/product.model';
+import {ProductService} from '../../core/services/product.service';
+import {tap} from 'rxjs';
+
+export interface ProductStateModel {
+  products: Product[];
+}
+
+@State<ProductStateModel>({
+  name: 'product',
+  defaults: {
+    products: []
+  }
+})
+@Injectable()
+export class ProductState {
+
+  productService = inject(ProductService);
+
+  @Selector()
+  static getState(state: ProductStateModel) {
+    return state;
+  }
+
+  @Selector()
+  static getAllProducts(state: ProductStateModel) {
+    return state.products;
+  }
+
+  @Selector()
+  static getProductById(state: ProductStateModel) {
+    return (id: number) => state.products.find(i => i.id === id);
+  }
+
+  @Action(ProductAction.Add)
+  add(ctx: StateContext<ProductStateModel>, {payload}: ProductAction.Add) {
+    const stateModel = ctx.getState();
+    stateModel.products = [...stateModel.products, payload];
+    ctx.setState(stateModel);
+  }
+
+  @Action(ProductAction.Got)
+  got(ctx: StateContext<ProductStateModel>) {
+    return this.productService.get().pipe(tap(products => {
+      ctx.patchState({products: products});
+    }));
+  }
+}
