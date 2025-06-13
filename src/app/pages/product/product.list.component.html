@@ -1,4 +1,4 @@
-@if (loading) {
+@if (loading()) {
   @for (_ of skeletonItems; track $index) {
     <div class="h-90 w-52 bg-white  rounded-t-xl relative  overflow-hidden">
       <div class="animate-pulse">
@@ -17,13 +17,13 @@
     </div>
   }
 } @else {
-  @for (product of products; track product.id) {
+  @for (product of products(); track product.id) {
     <app-product-card [product]="product" (addProduct)="addProduct($event)"
                       (subtractProduct)="substractProduct($event)">
 
     </app-product-card>
   } @empty {
-    <p>Sin productos</p>
+    <span>Sin productos por el momento.</span>
   }
 
 }

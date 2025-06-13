@@ -17,11 +17,14 @@
   <span class="text-custom-secondary">{{ product?.description }}</span>
   <span class="text-gray-400">{{ product?.weight }}</span>
   <div class="mt-4 flex items-start">
-    <span class="text-3xl font-bold text-custom-secondary">17.</span>
-    <span class="text-sm font-bold mt-1 text-custom-secondary">29$</span>
+    <span
+      class="text-3xl font-bold text-custom-secondary">{{ product?.price | decimalNumber: NumberFragment.whole }}</span>
+    <span
+      class="text-sm font-bold mt-1 text-custom-secondary">{{ product?.price | decimalNumber: NumberFragment.fractional }}
+      $</span>
   </div>
 
-  <div (click)="product?.amount === 0 && onAddProduct()"
+  <div (click)="amountItemsInCartById() > 0 && onAddProduct()"
        class="my-8 relative  bg-[#f1f5ec] text-custom-secondary text-3xl w-32 flex justify-center   hover:bg-custom-secondary hover:text-white transition-colors duration-200"
   >
     <!-- Curva superior -->
@@ -30,7 +33,7 @@
     <svg class="absolute -top-1 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 150 1440 93">
       <path d="M 0 183 C 344 263 1059 263 1440 183 L 1440 150 L 0 150 Z" fill="#ffffff"/>
     </svg>
-    @if (product!.amount > 0) {
+    @if (amountItemsInCartById() > 0) {
       <button (click)="onSubstractProduct();$event.stopPropagation()"
               class="flex justify-center items-center w-6 h-6 rounded-full border-2 border-green-900 bg-custom-primary text-green-900 text-sm font-bold transform -translate-x-5 translate-y-2 ">
         -
@@ -38,13 +41,14 @@
     }
 
     <span class="my-1 transform -translate-y-0.5">
-     @if (product?.amount == 0) {
-       +
-     } @else {
-       {{ product?.amount }}
-     }
+      <!--(isProductInCart$|async) ? (product?.id) : false-->
+      @if (amountItemsInCartById() === 0) {
+        +
+      } @else {
+        {{ amountItemsInCartById() }}
+      }
     </span>
-    @if (product!.amount > 0) {
+    @if (product!.available > 0 && amountItemsInCartById() > 0) {
       <button (click)="onAddProduct();$event.stopPropagation()"
               class="flex justify-center items-center w-6 h-6 rounded-full border-2 border-green-900 bg-custom-primary text-green-900 text-sm font-bold transform translate-x-5 translate-y-2 ">
         +

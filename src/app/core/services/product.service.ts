@@ -12,7 +12,7 @@ export class ProductService {
       weight: '500 gm',
       price: 17.29,
       imageUrl: 'assets/product/beetroot.webp',
-      amount: 0,
+      available: 5,
     },
     {
       id: 1,
@@ -21,7 +21,7 @@ export class ProductService {
       weight: '500 gm',
       price: 10.99,
       imageUrl: 'assets/product/carrot.webp',
-      amount: 0,
+      available: 4,
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ export class ProductService {
       weight: '500 gm',
       price: 6.99,
       imageUrl: 'assets/product/tomato.webp',
-      amount: 0,
+      available: 3,
     },
     {
       id: 3,
@@ -39,7 +39,7 @@ export class ProductService {
       weight: '2 kg',
       price: 400,
       imageUrl: 'assets/product/tv.webp',
-      amount: 0,
+      available: 2,
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ export class ProductService {
       weight: '10 kg',
       price: 800,
       imageUrl: '',
-      amount: 0,
+      available: 1,
     }
   ];
 
@@ -57,6 +57,6 @@ export class ProductService {
   }
 
   get(): Observable<Product[] | []> {
-    return of(this.products).pipe(delay(10000));
+    return of(this.products).pipe(delay(1000));
   }
 }
