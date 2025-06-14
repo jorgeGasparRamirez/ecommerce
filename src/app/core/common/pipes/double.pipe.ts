@@ -9,14 +9,16 @@ export enum NumberFragment {
   name: 'decimalNumber',
 })
 export class DoublePipe implements PipeTransform {
-  transform(value: number | null | undefined, fragment: NumberFragment): number | string {
+  transform(value: number | null | undefined, fragment: NumberFragment): string {
     if (value === null || value === undefined || isNaN(value)) {
-      return 0;
+      return '';
     }
+    const [whole, fractional] = value.toString().split('.');
     if (fragment == NumberFragment.whole) {
-      return parseInt(value.toFixed());
+      console.log(`${value} the whole is ${value} `);
+      return whole;
     } else {
-      const [_, fractional] = value.toString().split('.');
+
       return parseInt(fractional) == 0 ? '' : fractional;
     }
   }

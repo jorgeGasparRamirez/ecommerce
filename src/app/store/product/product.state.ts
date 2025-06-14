@@ -50,6 +50,7 @@ export class ProductState {
   @Action(GotProduct)
   got(ctx: StateContext<ProductStateModel>) {
     return this.productService.get().pipe(tap(products => {
+      console.log('got products', JSON.stringify(products));
       ctx.patchState({products: products});
     }));
   }

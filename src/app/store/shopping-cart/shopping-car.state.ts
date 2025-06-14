@@ -55,7 +55,7 @@ export class ShoppingCarState {
           quantity: 1,
           priceSnapshot: payload.price
         }],
-        total: payload.price
+        total: stateModel.total + payload.price,
       });
     } else {
       ctx.dispatch(new UpdateCartItem(existItem!.productId, existItem!.quantity + 1));
@@ -70,13 +70,13 @@ export class ShoppingCarState {
     if (itemIndex === -1) return;
 
     const itemToUpdate = stateModel.items[itemIndex];
-    const quantityDifference = quantity - itemToUpdate.quantity;
+
 
     //Clonar el array para mantener la inmutabilidad
     const updatedItems = [...stateModel.items];
     updatedItems[itemIndex] = {...itemToUpdate, quantity: quantity};
-
-    ctx.patchState({items: updatedItems, total: stateModel.total + (quantityDifference * itemToUpdate.priceSnapshot)});
+   
+    ctx.patchState({items: updatedItems, total: stateModel.total + itemToUpdate.priceSnapshot});
   }
 
   @Action(DeleteCartItem)
