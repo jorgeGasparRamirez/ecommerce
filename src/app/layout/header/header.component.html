@@ -42,12 +42,21 @@
 
   <!--RIGHT OPTION-->
   <div class="hidden sm:flex">
-    <div class="text-custom-secondary mr-1 ml-8">
-      <button class="p-1 rounded-full">
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300">
-          <use xlink:href="assets/sprites.svg#cart_shopping"/>
-        </svg>
-      </button>
+    <div class="relative">
+      <div class="text-custom-secondary mr-1 ml-8">
+        <button class="p-1 rounded-full">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300">
+            <use xlink:href="assets/sprites.svg#cart_shopping"/>
+          </svg>
+        </button>
+      </div>
+      @if (showTotalItems()) {
+        <span
+          class="absolute -top-2 -right-1.5 rounded-full bg-custom-tertiary px-1.5 py-0.5 text-xs font-medium text-white ring-1 ring-white/30 ring-inset">
+        {{ totalItems() }}
+      </span>
+      }
+
     </div>
 
     <div class="text-custom-secondary ml-1 mr-4 transition-all duration-300">

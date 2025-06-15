@@ -28,6 +28,11 @@ export class ShoppingCarState {
     return state;
   }
 
+  @Selector()
+  static totalItemsInCart(state: ShoppingCarStateModel) {
+    return state.items.reduce((total, currentValue) => total + currentValue.quantity, 0);
+  }
+
   @Selector([ShoppingCarState])
   static amountItemInCartById(state: ShoppingCarStateModel) {
     return (productId: number) => state.items.find(item => item.productId == productId)?.quantity ?? 0;
@@ -75,7 +80,7 @@ export class ShoppingCarState {
     //Clonar el array para mantener la inmutabilidad
     const updatedItems = [...stateModel.items];
     updatedItems[itemIndex] = {...itemToUpdate, quantity: quantity};
-   
+
     ctx.patchState({items: updatedItems, total: stateModel.total + itemToUpdate.priceSnapshot});
   }
 
@@ -88,17 +93,25 @@ export class ShoppingCarState {
 
     const itemToDelete = {...stateModel.items[index]};
 
+    const priceInCents = Math.round(itemToDelete.priceSnapshot * 100);
     if (itemToDelete.quantity > 1) {
-      const newTotal = stateModel.total - itemToDelete.priceSnapshot;
+      const totalInCents = Math.round(stateModel.total * 100);
+      const newTotal = (totalInCents - priceInCents) / 100;
       itemToDelete.quantity -= 1;
 
       const updatedItems = [...stateModel.items];
       updatedItems[index] = itemToDelete;
-      ctx.patchState({items: updatedItems, total: newTotal});
+      console.log(`StateModel.total: ${stateModel.total}`);
+      console.log(`PriceSnapshot: ${itemToDelete.priceSnapshot}`);
+      console.log(`Restando, total: ${stateModel.total - itemToDelete.priceSnapshot}`);
+      ctx.patchState({items: updatedItems, total: parseFloat(newTotal.toFixed(2))});
     } else {
       const updatedItems = stateModel.items.filter(value => value.productId !== id);
-
-      ctx.patchState({items: updatedItems, total: stateModel.total - itemToDelete.priceSnapshot});
+      console.log(`StateModel.total: ${stateModel.total}`);
+      console.log(`PriceSnapshot: ${itemToDelete.priceSnapshot}`);
+      console.log(`Restando faltando 1 en el total:${stateModel.total - itemToDelete.priceSnapshot}`);
+      const newTotal = stateModel.total - itemToDelete.priceSnapshot;
+      ctx.patchState({items: updatedItems, total: parseFloat(newTotal.toFixed(2))});
     }
   }
 }
