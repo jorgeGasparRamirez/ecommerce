@@ -1,0 +1,114 @@
+<span class="block mt-9 text-md font-bold text-custom-secondary">Todas las categorias/ Vegetales</span>
+
+<div class="grid grid-cols-2 w-full my-6">
+  <!--Columna #1-->
+  <div class="grid justify-self-center ">
+    <div class="relative w-96">
+      <img
+        [ngSrc]="selectedImg()"
+        height='384'
+        width='384'
+        class="h-96 w-full rounded-xl object-cover"
+      />
+      <span class="absolute top-0 left-0 bg-custom-accent text-white rounded-tl-xl rounded-br-xl px-4 py-1">
+        Entrega libre </span>
+
+      @if (product()?.thumbnailsUrl?.length) {
+        <div class="grid grid-cols-5 gap-2 my-4">
+          @for (item of product()!.thumbnailsUrl; track item) {
+            <div class="rounded-md h-20">
+              <img [ngSrc]="item" alt="a" width="80" height="80"
+                   class="rounded-md h-full w-full object-cover hover:border-2 text-custom-secondary"
+                   (mouseover)="zoomThumbnail(item)"/>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!--Columna #2-->
+  <div class="">
+    <div class="text-custom-warn flex items-center">
+      <svg class="size-4 mr-4">
+        <use xlink:href="./assets/sprites.svg#clock"></use>
+      </svg>
+      <span> 270 : 13 : 10 : 32</span>
+    </div>
+
+    <div class="text-custom-secondary text-xl font-bold my-2">Remolacha</div>
+
+
+    <div class="text-custom-secondary">
+      <span>Calidad 4.5 </span><span class="text-gray-300">(15 opiniones)</span>
+    </div>
+
+    <div class="mt-3 flex items-start">
+      <span
+        class="text-4xl font-bold text-custom-secondary">{{ product()?.price | decimalNumber: NumberFragment.whole }}</span>
+      <span
+        class="text-sm font-bold mt-1 text-custom-secondary">{{ product()?.price | decimalNumber: NumberFragment.fractional }}
+        $</span>
+    </div>
+
+    <!--Divider-->
+    <div class="border-t border-t-gray-300 my-6"></div>
+
+    <div class="flex justify-around">
+      <button
+        class="group min-w-44 text-custom-secondary bg-gray-400/8 rounded-3xl px-4 py-2 flex justify-between ">
+        <svg class="size-3 self-center group-hover:scale-150">
+          <use xlink:href="./assets/sprites.svg#cart_shopping"></use>
+        </svg>
+        <label class="group-hover:underline">Añadir al carrito</label>
+      </button>
+
+      <button
+        class="min-w-44 bg-[#c3ed7c] text-custom-secondary rounded-3xl px-4 py-2 hover:font-bold transition-all">
+        Comprar
+      </button>
+    </div>
+
+    <div class="mt-6 text-custom-secondary underline flex">
+      <svg class="size-4 self-center mr-2">
+        <use xlink:href="./assets/sprites.svg#store"/>
+      </svg>
+      Comparar con otros vendedores
+    </div>
+
+    <!--Divider-->
+    <div class="border-t border-t-gray-300 mt-6 mb-2"></div>
+    <div class="flex justify-end text-[#b94b1f]">
+      <svg class="size-4 self-center mr-2">
+        <use xlink:href="./assets/sprites.svg#caca"/>
+      </svg>
+      <label> 100 vendidos en las últimas 30 horas </label>
+    </div>
+
+    <div class="mt-1 font-bold text-custom-secondary">Detalles del producto:</div>
+    <p class="mt-1 text-custom-secondary text-justify">Raíces de intenso color rubí cultivadas sosteniblemente, con un
+      equilibrio
+      perfecto
+      entre dulzor natural y notas
+      terrosas. Seleccionadas a mano para garantizar tamaño uniforme (6-8 cm) y máxima frescura. </p>
+    <div>
+      <div class="text-custom-secondary font-semibold mt-3 underline">Beneficios:</div>
+      <ul class="text-custom-secondary list-disc pl-5">
+        <li>Alto contenido en antioxidantes (betalaínas).</li>
+        <li>Fuente natural de hierro, folato y vitamina C.</li>
+        <li>Favorece la salud cardiovascular.</li>
+        <li>Versátil en la cocina: asar, crudas, jugos, hummus.</li>
+      </ul>
+    </div>
+    <p class="mt-3 text-custom-secondary text-justify">Cosechadas a máximo 48h antes de entrega, con hojas verdes
+      incluidas. Cultivo
+      libre de pesticidas
+      sintéticos, de
+      agricultores locales comprometidos con prácticas regenerativas.</p>
+  </div>
+
+
+</div>
+
+
+

@@ -11,10 +11,16 @@ export const routes: Routes = [
   },
   {
     path: '', component: LayoutComponent,
-    children: [{
-      path: 'dashboard',
-      loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
-    }],
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
+      },
+      {
+        path: 'details/:id',
+        loadComponent: () => import('./pages/product/details-card/details-card.component').then(m => m.DetailsCardComponent),
+      }
+    ],
     canActivate: [AuthGuard],
   },
 ];

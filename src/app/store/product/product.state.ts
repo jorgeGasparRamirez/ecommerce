@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {State, Action, Selector, StateContext} from '@ngxs/store';
 import {AddProduct, GotProduct} from './product.actions';
-import {Product} from '../../pages/product/product.model';
+import {Product} from '../../pages/product/list-card/product.model';
 import {ProductService} from '../../core/services/product.service';
 import {tap} from 'rxjs';
 
@@ -50,7 +50,6 @@ export class ProductState {
   @Action(GotProduct)
   got(ctx: StateContext<ProductStateModel>) {
     return this.productService.get().pipe(tap(products => {
-      console.log('got products', JSON.stringify(products));
       ctx.patchState({products: products});
     }));
   }

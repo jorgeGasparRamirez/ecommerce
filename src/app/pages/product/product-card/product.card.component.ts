@@ -1,10 +1,8 @@
 import {Component, computed, effect, EventEmitter, inject, Input, Output,} from '@angular/core';
-import {Product} from '../product.model';
+import {Product} from '../list-card/product.model';
 import {NgOptimizedImage} from '@angular/common';
 import {Store} from '@ngxs/store';
 import {ShoppingCarState} from '../../../store/shopping-cart/shopping-car.state';
-// import {toSignal} from '@angular/core/rxjs-interop';
-// import {map} from 'rxjs';
 import {DoublePipe, NumberFragment} from '../../../core/common/pipes/double.pipe';
 
 @Component({

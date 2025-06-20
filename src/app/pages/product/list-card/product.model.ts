@@ -5,5 +5,6 @@ export interface Product {
   weight: string;
   price: number;
   imageUrl: string;
+  thumbnailsUrl?: string[];
   available: number;
 }

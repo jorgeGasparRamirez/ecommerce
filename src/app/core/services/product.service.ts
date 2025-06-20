@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Product} from '../../pages/product/product.model';
+import {Product} from '../../pages/product/list-card/product.model';
 import {delay, Observable, of} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
@@ -12,6 +12,7 @@ export class ProductService {
       weight: '500 gm',
       price: 17.29,
       imageUrl: 'assets/product/beetroot.webp',
+      thumbnailsUrl: ['assets/product/thumbnails-beetroot-first.webp', 'assets/product/thumbnails-beetroot-second.webp', 'assets/product/thumbnails-beetroot-third.webp', 'assets/product/thumbnails-beetroot-fourth.webp', 'assets/product/thumbnails-beetroot-fifth.webp'],
       available: 5,
     },
     {
@@ -21,6 +22,7 @@ export class ProductService {
       weight: '500 gm',
       price: 10.99,
       imageUrl: 'assets/product/carrot.webp',
+      thumbnailsUrl: [],
       available: 4,
     },
     {
@@ -30,6 +32,7 @@ export class ProductService {
       weight: '500 gm',
       price: 6.99,
       imageUrl: 'assets/product/tomato.webp',
+      thumbnailsUrl: [],
       available: 3,
     },
     {
@@ -39,6 +42,7 @@ export class ProductService {
       weight: '2 kg',
       price: 400,
       imageUrl: 'assets/product/tv.webp',
+      thumbnailsUrl: [],
       available: 2,
     },
     {
@@ -47,7 +51,8 @@ export class ProductService {
       description: '(Tienda local)',
       weight: '10 kg',
       price: 800,
-      imageUrl: '',
+      imageUrl: 'assets/product/washing.webp',
+      thumbnailsUrl: [],
       available: 1,
     }
   ];

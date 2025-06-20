@@ -1,7 +1,7 @@
 import {Component, computed, inject, signal, Signal} from '@angular/core';
 import {CategoryStripComponent} from '../category-strip/category-strip.component';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout'
-import {ProductListComponent} from '../product/product.list.component';
+import {ProductListComponent} from '../product/list-card/product.list.component';
 // import {Observable} from 'rxjs';
 import {NgClass} from '@angular/common';
 import {ProductState} from '../../store/product/product.state';

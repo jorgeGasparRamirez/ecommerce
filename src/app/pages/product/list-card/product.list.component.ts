@@ -1,11 +1,11 @@
 import {Component, effect, inject, signal, Signal, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ProductCardComponent} from './product.card/product.card.component';
+import {ProductCardComponent} from '../product-card/product.card.component';
 import {Product} from './product.model';
 import {Store} from '@ngxs/store';
-import {ProductState} from '../../store/product/product.state';
-import {GotProduct} from '../../store/product/product.actions';
-import {AddCartItem, DeleteCartItem} from '../../store/shopping-cart/shopping-car.actions';
+import {ProductState} from '../../../store/product/product.state';
+import {GotProduct} from '../../../store/product/product.actions';
+import {AddCartItem, DeleteCartItem} from '../../../store/shopping-cart/shopping-car.actions';
 
 import {toSignal} from '@angular/core/rxjs-interop';
 

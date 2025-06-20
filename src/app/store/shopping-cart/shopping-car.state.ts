@@ -47,6 +47,7 @@ export class ShoppingCarState {
   static isProductInCart(state: ShoppingCarStateModel) {
     return (productId: number) => state.items.some(value => value.productId === productId);
   }
+  
 
   @Action(AddCartItem)
   add(ctx: StateContext<ShoppingCarStateModel>, {payload}: AddCartItem) {
